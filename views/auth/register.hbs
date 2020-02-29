@@ -7,22 +7,29 @@
           https://getbootstrap.com/docs/4.0/examples/
         </a>
     </p>
+    <p>
+      Already have an account? <a href="/login">Login</a>
+    </p>
   </div>
 
   <div class="form-label-group">
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
+    <input type="email" id="inputName" class="form-control" placeholder="Name">
+    <label for="inputName">Name</label>
+  </div>
+
+  <div class="form-label-group">
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
     <label for="inputEmail">Email address</label>
   </div>
 
   <div class="form-label-group">
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="" autocomplete="off">
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password">
     <label for="inputPassword">Password</label>
   </div>
 
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
+  <div class="form-label-group">
+    <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password">
+    <label for="inputConfirmPassword">Confirm password</label>
   </div>
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
