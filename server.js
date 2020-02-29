@@ -10,8 +10,15 @@ let appConfig = require('./configs/app');
 
 // Views engine
 let exphbs = require('express-handlebars');
+// Imports a set of helpers for handlebars
+// https://github.com/helpers/handlebars-helpers
+let hbshelpers = require("handlebars-helpers");
+let multihelpers = hbshelpers();
 const extNameHbs = 'hbs';
-let hbs = exphbs.create({extname: extNameHbs});
+let hbs = exphbs.create({
+  extname: extNameHbs,
+  helpers: multihelpers
+});
 app.engine(extNameHbs, hbs.engine);
 app.set('view engine', extNameHbs);
 
