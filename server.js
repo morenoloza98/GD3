@@ -22,6 +22,9 @@ let hbs = exphbs.create({
 app.engine(extNameHbs, hbs.engine);
 app.set('view engine', extNameHbs);
 
+// body parsing
+app.use(express.urlencoded({ extended: true }))
+
 /**
  * Routes
  */
