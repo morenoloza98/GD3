@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+let userModel = require('../models/User');
 
 exports.login = (req, res) => {
   res.render('auth/login', { layout: 'auth' });
@@ -18,5 +19,10 @@ exports.store = (req, res) => {
     req.flash('errors', errors.array());
     return res.redirect('back');
   }
-  res.send('Registrar usuario');
+  userModel.create({ name: req.body.name, email: req.body.email, password: req.body.password })
+    .then((data) => {
+      return res.send('Usuario registrado con éxito');
+    })
+    .catch((error) => console.log(error));
 }
+
