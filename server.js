@@ -6,6 +6,7 @@ let cookieParser = require('cookie-parser');
 let session = require('express-session');
 let flash = require('express-flash');
 let sessionStore = new session.MemoryStore;
+let passport = require('passport');
 
 /**
  * Configurations
@@ -13,7 +14,7 @@ let sessionStore = new session.MemoryStore;
 
 let appConfig = require('./configs/app');
 
-// Views engine
+// Configuraciones para el view engine
 let exphbs = require('express-handlebars');
 // Imports a set of helpers for handlebars
 // https://github.com/helpers/handlebars-helpers
@@ -27,8 +28,10 @@ let hbs = exphbs.create({
 app.engine(extNameHbs, hbs.engine);
 app.set('view engine', extNameHbs);
 
+// Configuraciones para el bodyparser
 app.use(express.urlencoded({ extended: true }))
 
+// Configuraciones de las sesiones
 app.use(cookieParser());
 app.use(session({
   cookie: { maxAge: 60000 },
@@ -38,6 +41,12 @@ app.use(session({
   secret: appConfig.secret
 }));
 app.use(flash());
+
+// Configuraciones de passport
+require('./configs/passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * Routes
