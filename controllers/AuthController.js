@@ -5,15 +5,18 @@ exports.login = (req, res) => {
 }
 
 exports.register = (req, res) => {
-  res.render('auth/register', { layout: 'auth' });
+  res.render('auth/register', {
+    layout: 'auth',
+    errors: req.flash('errors')
+  });
 }
 
 exports.store = (req, res) => {
   // Identifica si hubieron errores en el request
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // Si los hubieron entonces regresa a la petición anterior
-    return res.status(422).json({ errors: errors.array() });
+    req.flash('errors', errors.array());
+    return res.redirect('back');
   }
   res.send('Registrar usuario');
 }
