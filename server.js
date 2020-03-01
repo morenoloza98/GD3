@@ -1,6 +1,8 @@
 let express = require('express');
 let app = express();
 let webRoutes = require('./routes/web');
+let appRoutes = require('./routes/app');
+let authMiddleware = require('./middlewares/AuthMiddleware');
 
 let cookieParser = require('cookie-parser');
 let session = require('express-session');
@@ -52,6 +54,7 @@ app.use(passport.session());
  * Routes
  */
 app.use('/', webRoutes);
+app.use('/app', authMiddleware.isAuth, appRoutes);
 
 /**
  * App Init

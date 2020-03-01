@@ -2,7 +2,8 @@ const { validationResult } = require('express-validator');
 let userModel = require('../models/User');
 
 exports.login = (req, res) => {
-  res.render('auth/login', { layout: 'auth' });
+  let authError = req.query.authError == 1 ? 'Invalid register data' : null;
+  res.render('auth/login', { layout: 'auth', authError: authError });
 }
 
 exports.register = (req, res) => {
@@ -21,7 +22,7 @@ exports.store = (req, res) => {
   }
   userModel.create({ name: req.body.name, email: req.body.email, password: req.body.password })
     .then((data) => {
-      return res.send('Usuario registrado con éxito');
+      return res.redirect('/login');
     })
     .catch((error) => console.log(error));
 }
