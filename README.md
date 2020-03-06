@@ -21,3 +21,15 @@ cp .env.example .env
 ```bash
 npm install
 ```
+
+3. Ejecuta las migraciones
+
+```bash
+knex migrate:latest
+```
+
+4. Ejecuta el servidor de Node.js
+
+```bash
+node server.js
+```
