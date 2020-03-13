@@ -3,7 +3,7 @@ let userModel = require('../models/User');
 
 exports.login = (req, res) => {
   let authError = req.query.authError == 1 ? 'Invalid register data' : null;
-  res.render('auth/login', { layout: 'auth', authError: authError });
+  res.render('auth/login', { layout: 'auth', authError: authError});
 }
 
 exports.register = (req, res) => {
@@ -20,10 +20,17 @@ exports.store = (req, res) => {
     req.flash('errors', errors.array());
     return res.redirect('back');
   }
-  userModel.create({ name: req.body.name, email: req.body.email, password: req.body.password })
+  userModel.create({ name: req.body.name, email: req.body.email, password: req.body.password, role: req.body.role })
     .then((data) => {
       return res.redirect('/login');
     })
     .catch((error) => console.log(error));
 }
 
+exports.usersManager = (req, res) => {
+  userModel.all()
+    .then((data) => {
+      let users = data;
+      res.render('admin/userManager', { users: users });
+    });
+}

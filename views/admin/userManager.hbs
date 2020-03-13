@@ -5,7 +5,13 @@
     </div>
   {{/if}}
   <div class="starter-template">
-    <h1>You are {{ user.name }}</h1>
+    <ul class="list-group m-4">
+        {{#each users}}
+        <li class="list-group-item">
+            {{email}} 
+        </li>
+        {{/each}}
+    </ul>
     <p>
       <a href="/logout">Cierra sesión</a>
     </p>
